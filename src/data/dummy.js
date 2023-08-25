@@ -433,6 +433,8 @@ export const customersGrid = [
 
 ];
 
+// driver component
+
 export const employeesGrid = [
   { headerText: 'Employee',
     width: '150',
@@ -444,17 +446,13 @@ export const employeesGrid = [
     textAlign: 'Center',
   },
   { field: 'Title',
-    headerText: 'Designation',
+    headerText: 'Vehicle',
     width: '170',
     textAlign: 'Center',
   },
-  { headerText: 'Country',
-    width: '120',
-    textAlign: 'Center',
-    template: gridEmployeeCountry },
 
-  { field: 'HireDate',
-    headerText: 'Hire Date',
+  { field: 'Phone',
+    headerText: 'Phone',
     width: '135',
     format: 'yMd',
     textAlign: 'Center' },
@@ -872,7 +870,7 @@ export const userProfileData = [
 
 export const ordersGrid = [
   {
-    headerText: 'Image',
+    headerText: 'Numbers',
     template: gridOrderImage,
     textAlign: 'Center',
     width: '120',
@@ -884,10 +882,32 @@ export const ordersGrid = [
     editType: 'dropdownedit',
     textAlign: 'Center',
   },
-  { field: 'CustomerName',
-    headerText: 'Customer Name',
+  { field: 'ChildName',
+    headerText: 'ChildName',
     width: '150',
     textAlign: 'Center',
+  },
+  { field: 'Phone',
+  headerText: 'Phone',
+  width: '150',
+  textAlign: 'Center',
+ },
+  
+  {
+    field: 'AmountPaid',
+    headerText: 'AmountPaid',
+    format: 'C2',
+    textAlign: 'Center',
+    editType: 'numericedit',
+    width: '150',
+  },
+  {
+    field: 'OutstandingAmount',
+    headerText: 'OutstandingAmoun',
+    format: 'C2',
+    textAlign: 'Center',
+    editType: 'numericedit',
+    width: '150',
   },
   {
     field: 'TotalAmount',
@@ -912,8 +932,8 @@ export const ordersGrid = [
   },
 
   {
-    field: 'Location',
-    headerText: 'Location',
+    field: 'Adresss',
+    headerText: 'Adress',
     width: '150',
     textAlign: 'Center',
   },
