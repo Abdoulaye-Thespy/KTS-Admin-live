@@ -456,11 +456,6 @@ export const employeesGrid = [
     width: '135',
     format: 'yMd',
     textAlign: 'Center' },
-
-  { field: 'ReportsTo',
-    headerText: 'Reports To',
-    width: '120',
-    textAlign: 'Center' },
   { field: 'EmployeeID',
     headerText: 'Employee ID',
     width: '125',
@@ -870,28 +865,34 @@ export const userProfileData = [
 
 export const ordersGrid = [
   {
-    headerText: 'Numbers',
+    headerText: 'Number',
     template: gridOrderImage,
     textAlign: 'Center',
     width: '120',
   },
   {
     field: 'OrderItems',
-    headerText: 'Item',
+    headerText: 'Parent_ID',
     width: '150',
     editType: 'dropdownedit',
     textAlign: 'Center',
   },
-  { field: 'ChildName',
-    headerText: 'ChildName',
+  { field: 'name',
+    headerText: 'Customer Name',
     width: '150',
     textAlign: 'Center',
   },
+
   { field: 'Phone',
   headerText: 'Phone',
   width: '150',
   textAlign: 'Center',
- },
+  },
+  { field: 'Children',
+  headerText: 'Children',
+  width: '150',
+  textAlign: 'Center',
+  },
   
   {
     field: 'AmountPaid',
@@ -916,19 +917,6 @@ export const ordersGrid = [
     textAlign: 'Center',
     editType: 'numericedit',
     width: '150',
-  },
-  {
-    headerText: 'Status',
-    template: gridOrderStatus,
-    field: 'OrderItems',
-    textAlign: 'Center',
-    width: '120',
-  },
-  {
-    field: 'OrderID',
-    headerText: 'Order ID',
-    width: '120',
-    textAlign: 'Center',
   },
 
   {
