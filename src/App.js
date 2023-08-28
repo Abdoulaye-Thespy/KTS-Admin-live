@@ -29,7 +29,7 @@ import "./App.css";
 
 import { useStateContext } from "./contexts/ContextProvider";
 
-const App = () => {
+const App = ({signOut}) => {
   const {
     setCurrentColor,
     setCurrentMode,
@@ -82,7 +82,7 @@ const App = () => {
             }
           >
             <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
-              <Navbar />
+              <Navbar logout={signOut}/>
             </div>
             <div>
               {themeSettings && <ThemeSettings />}

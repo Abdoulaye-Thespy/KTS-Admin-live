@@ -27,7 +27,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   </TooltipComponent>
 );
 
-const Navbar = () => {
+const Navbar = ({logout}) => {
   const {
     currentColor,
     activeMenu,
@@ -37,6 +37,13 @@ const Navbar = () => {
     setScreenSize,
     screenSize,
   } = useStateContext();
+
+  const buttonStyle = {
+    borderRadius: '5px',
+    backgroundColor: 'red',
+    padding: '2px',
+    width: '100px'
+  };
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -67,7 +74,7 @@ const Navbar = () => {
         icon={<AiOutlineMenu />}
       />
       <div className="flex">
-        <NavButton
+{/*        <NavButton
           title="Cart"
           customFunc={() => handleClick("cart")}
           color={currentColor}
@@ -87,10 +94,18 @@ const Navbar = () => {
           color={currentColor}
           icon={<RiNotification3Line />}
         />
+        <NavButton
+          title="SignOut"
+          dotColor="rgb(254, 201, 15)"
+          onClick={Logout}
+          color={currentColor}
+          icon={<RiNotification3Line />}
+        />*/}
+      <button onClick={logout}  style={buttonStyle}>logout</button>
         <TooltipComponent content="Profile" position="BottomCenter">
           <div
             className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
-            onClick={() => handleClick("userProfile")}
+            onClick={() => handleClick("")}
           >
             <img
               className="rounded-full w-8 h-8"
@@ -100,7 +115,7 @@ const Navbar = () => {
             <p>
               <span className="text-gray-400 text-14">Hi,</span>{" "}
               <span className="text-gray-400 font-bold ml-1 text-14">
-                Morg
+                ETAH
               </span>
             </p>
             <MdKeyboardArrowDown className="text-gray-400 text-14" />
