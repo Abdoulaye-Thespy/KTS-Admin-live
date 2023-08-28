@@ -3,6 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
+import { withAuthenticator, Button, Heading } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+
 import { Navbar, Footer, Sidebar, ThemeSettings } from "./components";
 import {
   Ecommerce,
@@ -103,4 +106,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withAuthenticator(App);
