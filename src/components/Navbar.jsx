@@ -5,6 +5,7 @@ import { BsChatLeft } from "react-icons/bs";
 import { RiNotification3Line } from "react-icons/ri";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
+import { useNavigate } from 'react-router-dom';
 
 import { Auth } from 'aws-amplify';
 
@@ -35,7 +36,7 @@ return (
 }
 
 
-const Navbar = ({logout}) => {
+const Navbar = () => {
   const {
     currentColor,
     activeMenu,
@@ -44,6 +45,8 @@ const Navbar = ({logout}) => {
     isClicked,
     setScreenSize,
     screenSize,
+    isAuthenticated,
+    setIsAuthenticated,
   } = useStateContext();
 
   const buttonStyle = {
@@ -75,6 +78,8 @@ const Navbar = ({logout}) => {
       await Auth.signOut();
       console.log('Successfully signed out!');
       // Perform any additional actions after sign-out
+      setIsAuthenticated(false);
+       navigate('/');
     } catch (error) {
       console.log('Error signing out:', error);
       // Handle sign-out error
@@ -82,6 +87,7 @@ const Navbar = ({logout}) => {
   };
 
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
+  const navigate = useNavigate();
 
   return (
     <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative">

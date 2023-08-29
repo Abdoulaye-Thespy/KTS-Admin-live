@@ -9,8 +9,8 @@ import myImage from '../data/KTSLogo.png';
 import { links } from "../data/dummy";
 import { useStateContext } from "../contexts/ContextProvider";
 
-const Sidebar = () => {
-  const { currentColor, activeMenu, setActiveMenu, screenSize } =
+const Sidebar = ({loggedIn}) => {
+  const { currentColor, activeMenu, setActiveMenu, screenSize, isAuthenticated } =
     useStateContext();
 
   const handleCloseSideBar = () => {
@@ -47,31 +47,33 @@ const Sidebar = () => {
               </button>
             </TooltipComponent>
           </div>
-          <div className="mt-10 ">
-            {links.map((item) => (
-              <div key={item.title}>
-                <p className="text-gray-400 dark:text-gray-400 m-3 mt-4 uppercase">
-                  {item.title}
-                </p>
-                {item.links.map((link) => (
-                  <NavLink
-                    to={`/${link.name}`}
-                    key={link.name}
-                    onClick={handleCloseSideBar}
-                    style={({ isActive }) => ({
-                      backgroundColor: isActive ? currentColor : "",
-                    })}
-                    className={({ isActive }) =>
-                      isActive ? activeLink : normalLink
-                    }
-                  >
-                    {link.icon}
-                    <span className="capitalize ">{link.name}</span>
-                  </NavLink>
-                ))}
-              </div>
-            ))}
-          </div>
+          {isAuthenticated ? (
+            <div className="mt-10">
+              {links.map((item) => (
+                <div key={item.title}>
+                  <p className="text-gray-400 dark:text-gray-400 m-3 mt-4 uppercase">
+                    {item.title}
+                  </p>
+                  {item.links.map((link) => (
+                    <NavLink
+                      to={`/${link.name}`}
+                      key={link.name}
+                      onClick={handleCloseSideBar}
+                      style={({ isActive }) => ({
+                        backgroundColor: isActive ? currentColor : '',
+                      })}
+                      className={({ isActive }) =>
+                        isActive ? activeLink : normalLink
+                      }
+                    >
+                      {link.icon}
+                      <span className="capitalize ">{link.name}</span>
+                    </NavLink>
+                  ))}
+                </div>
+              ))}
+            </div>
+          ) : null}
         </>
       )}
     </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
@@ -6,6 +6,7 @@ import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { withAuthenticator, Button, Heading } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import AuthPage from './pages/AuthPage'
+import { Amplify, Auth } from 'aws-amplify';
 
 import { Navbar, Footer, Sidebar, ThemeSettings } from "./components";
 import {
@@ -30,7 +31,7 @@ import "./App.css";
 
 import { useStateContext } from "./contexts/ContextProvider";
 
-const App = ({signOut}) => {
+const App = () => {
   const {
     setCurrentColor,
     setCurrentMode,
@@ -39,16 +40,29 @@ const App = ({signOut}) => {
     currentColor,
     themeSettings,
     setThemeSettings,
+    isAuthenticated,
+    setIsAuthenticated,
   } = useStateContext();
 
   useEffect(() => {
     const currentThemeColor = localStorage.getItem("colorMode");
     const currentThemeMode = localStorage.getItem("themeMode");
+    console.log(isAuthenticated);
     if (currentThemeColor && currentThemeMode) {
       setCurrentColor(currentThemeColor);
       setCurrentMode(currentThemeMode);
     }
-  }, []);
+    checkAuthStatus();
+  }, [isAuthenticated]);
+
+  const checkAuthStatus = async () => {
+    try {
+      await Auth.currentAuthenticatedUser();
+      setIsAuthenticated(true);
+    } catch (error) {
+      setIsAuthenticated(false);
+    }
+  };
 
   return (
     <div className={currentMode === "Dark" ? "dark" : ""}>
@@ -68,11 +82,11 @@ const App = ({signOut}) => {
           </div>
           {activeMenu ? (
             <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
-              <Sidebar />
+              <Sidebar/>
             </div>
           ) : (
             <div className="w-0 dark:bg-secondary-dark-bg">
-              <Sidebar />
+              <Sidebar/>
             </div>
           )}
           <div
@@ -83,7 +97,7 @@ const App = ({signOut}) => {
             }
           >
             <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
-              <Navbar logout={signOut}/>
+              {isAuthenticated ? <Navbar /> : ""}
             </div>
             <div>
               {themeSettings && <ThemeSettings />}

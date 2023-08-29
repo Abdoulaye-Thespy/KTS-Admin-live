@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import { Auth } from 'aws-amplify';
+import { useNavigate } from 'react-router-dom';
+import { useStateContext } from "../contexts/ContextProvider";
 
 const AdminSignIn = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+  } = useStateContext();
 
   const handlePhoneNumberChange = (e) => {
     setPhoneNumber(e.target.value);
@@ -19,6 +26,8 @@ const AdminSignIn = () => {
       await Auth.signIn(phoneNumber, password);
       console.log('Successfully signed in!');
       // Do something after successful sign-in
+        setIsAuthenticated(true);
+        navigate('/report');
     } catch (error) {
       console.log('Error signing in:', error);
       // Handle sign-in error
