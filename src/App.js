@@ -5,6 +5,7 @@ import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
 import { withAuthenticator, Button, Heading } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
+import AuthPage from './pages/AuthPage'
 
 import { Navbar, Footer, Sidebar, ThemeSettings } from "./components";
 import {
@@ -89,7 +90,7 @@ const App = ({signOut}) => {
 
               <Routes>
                 {/* dashboard  */}
-                <Route path="/" element={<Ecommerce />} />
+                <Route path="/" element={<AuthPage />} />
                 <Route path="/Report" element={<Ecommerce />} />
 
                 {/* pages  */}
@@ -106,5 +107,5 @@ const App = ({signOut}) => {
   );
 };
 
-export default withAuthenticator(App);
-// export default App;
+// export default withAuthenticator(App);
+export default App;

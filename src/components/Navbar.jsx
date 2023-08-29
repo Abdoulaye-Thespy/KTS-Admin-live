@@ -6,12 +6,16 @@ import { RiNotification3Line } from "react-icons/ri";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
+import { Auth } from 'aws-amplify';
+
 import avatar from "../data/avatar.jpg";
 import { Cart, Chat, Notification, UserProfile } from ".";
 import { useStateContext } from "../contexts/ContextProvider";
 
-const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
-  <TooltipComponent content={title} position="BottomCenter">
+const NavButton = ({ title, customFunc, icon, color, dotColor }) => {
+
+return (
+<TooltipComponent content={title} position="BottomCenter">
     <button
       type="button"
       onClick={() => customFunc()}
@@ -26,6 +30,10 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
     </button>
   </TooltipComponent>
 );
+
+
+}
+
 
 const Navbar = ({logout}) => {
   const {
@@ -62,6 +70,16 @@ const Navbar = ({logout}) => {
       setActiveMenu(true);
     }
   }, [screenSize]);
+  const handleSignOut = async () => {
+    try {
+      await Auth.signOut();
+      console.log('Successfully signed out!');
+      // Perform any additional actions after sign-out
+    } catch (error) {
+      console.log('Error signing out:', error);
+      // Handle sign-out error
+    }
+  };
 
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
 
@@ -101,7 +119,7 @@ const Navbar = ({logout}) => {
           color={currentColor}
           icon={<RiNotification3Line />}
         />*/}
-      <button onClick={logout}  style={buttonStyle}>logout</button>
+      <button onClick={handleSignOut}  style={buttonStyle}>logout</button>
         <TooltipComponent content="Profile" position="BottomCenter">
           <div
             className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"

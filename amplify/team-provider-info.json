@@ -29,9 +29,6 @@
       "storage": {
         "dynamo3a282170": {},
         "students": {}
-      },
-      "api": {
-        "parents": {}
       }
     }
   }
