@@ -19,7 +19,7 @@
       "function": {
         "ktsapp37bd30f2": {
           "deploymentBucketName": "amplify-ktsapp-dev-115134-deployment",
-          "s3Key": "amplify-builds/ktsapp37bd30f2-45576a5a7a584b454c54-build.zip"
+          "s3Key": "amplify-builds/ktsapp37bd30f2-506b2f726f34554e5776-build.zip"
         },
         "students": {
           "deploymentBucketName": "amplify-ktsapp-dev-115134-deployment",
@@ -29,6 +29,9 @@
       "storage": {
         "dynamo3a282170": {},
         "students": {}
+      },
+      "api": {
+        "parents": {}
       }
     }
   }

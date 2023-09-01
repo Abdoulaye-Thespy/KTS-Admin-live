@@ -23,21 +23,26 @@ const Orders = () => {
   const editing = { allowDeleting: true, allowEditing: true };
   const [parents, setParents] = useState({});
   const apiName = 'parents'; // replace this with your api name.
-  const path = '/parents';
+  const path = `/parents/p`;
+  const myInit = {
+      // body: {parent_id: "12345678jkkjj",},
+       headers: { // Allow POST method
+        },
+      response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
+      queryStringParameters: {
+       parent_id: '1234567' // OPTIONAL
+      }
+  };
     useEffect(() => {
-    const fetchUserData = async () => {
-
-         API.get(apiName, path)
-          .then((response) => {
-            // Add your code here
-            console.log(response);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-    };
-
-    fetchUserData();
+        API.get(apiName, path, myInit)
+        .then((response) => {
+          // Add your code here
+          console.log("success");
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
   },[]);
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
