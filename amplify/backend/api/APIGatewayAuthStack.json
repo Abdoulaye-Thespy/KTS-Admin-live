@@ -11,7 +11,7 @@
     "env": {
       "Type": "String"
     },
-    "parents": {
+    "ktsAPI": {
       "Type": "String"
     }
   },
@@ -52,7 +52,7 @@
                       },
                       ":",
                       {
-                        "Ref": "parents"
+                        "Ref": "ktsAPI"
                       },
                       "/",
                       {
@@ -82,7 +82,7 @@
                       },
                       ":",
                       {
-                        "Ref": "parents"
+                        "Ref": "ktsAPI"
                       },
                       "/",
                       {
@@ -97,7 +97,30 @@
                       "/*/parents"
                     ]
                   ]
-                },
+                }
+              ]
+            }
+          ]
+        },
+        "Roles": [
+          {
+            "Ref": "authRoleName"
+          }
+        ]
+      }
+    },
+    "PolicyAPIGWUnauth1": {
+      "Type": "AWS::IAM::ManagedPolicy",
+      "Properties": {
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "execute-api:Invoke"
+              ],
+              "Resource": [
                 {
                   "Fn::Join": [
                     "",
@@ -112,7 +135,7 @@
                       },
                       ":",
                       {
-                        "Ref": "parents"
+                        "Ref": "ktsAPI"
                       },
                       "/",
                       {
@@ -124,7 +147,7 @@
                           }
                         ]
                       },
-                      "/*/students/*"
+                      "/*/parents/*"
                     ]
                   ]
                 },
@@ -142,7 +165,7 @@
                       },
                       ":",
                       {
-                        "Ref": "parents"
+                        "Ref": "ktsAPI"
                       },
                       "/",
                       {
@@ -154,7 +177,7 @@
                           }
                         ]
                       },
-                      "/*/students"
+                      "/*/parents"
                     ]
                   ]
                 }
@@ -164,7 +187,7 @@
         },
         "Roles": [
           {
-            "Ref": "authRoleName"
+            "Ref": "unauthRoleName"
           }
         ]
       }

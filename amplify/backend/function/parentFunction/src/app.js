@@ -17,18 +17,18 @@ const express = require('express')
 const ddbClient = new DynamoDBClient({ region: process.env.TABLE_REGION });
 const ddbDocClient = DynamoDBDocumentClient.from(ddbClient);
 
-let tableName = "students";
+let tableName = "parentsTable";
 if (process.env.ENV && process.env.ENV !== "NONE") {
   tableName = tableName + '-' + process.env.ENV;
 }
 
 const userIdPresent = false; // TODO: update in case is required to use that definition
-const partitionKeyName = "students_id";
+const partitionKeyName = "parent_id";
 const partitionKeyType = "S";
-const sortKeyName = "parent_id";
-const sortKeyType = "S";
+const sortKeyName = "";
+const sortKeyType = "";
 const hasSortKey = sortKeyName !== "";
-const path = "/students";
+const path = "/parents";
 const UNAUTH = 'UNAUTH';
 const hashKeyPath = '/:' + partitionKeyName;
 const sortKeyPath = hasSortKey ? '/:' + sortKeyName : '';
@@ -59,7 +59,7 @@ const convertUrlType = (param, type) => {
  * HTTP Get method for list objects *
  ********************************/
 
-app.get(path + hashKeyPath, async function(req, res) {
+app.get(path, async function(req, res) {
   const condition = {}
   condition[partitionKeyName] = {
     ComparisonOperator: 'EQ'

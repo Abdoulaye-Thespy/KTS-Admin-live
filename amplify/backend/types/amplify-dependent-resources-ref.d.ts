@@ -1,13 +1,13 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
-    "parents": {
+    "ktsAPI": {
       "ApiId": "string",
       "ApiName": "string",
       "RootUrl": "string"
     }
   },
   "auth": {
-    "ktsapp8bc2274a8bc2274a": {
+    "ktsauth": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "CreatedSNSRole": "string",
@@ -19,14 +19,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
-    "ktsapp37bd30f2": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
-    "students": {
+    "parentFunction": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -35,22 +28,12 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "storage": {
-    "dynamo3a282170": {
+    "parentsTable": {
       "Arn": "string",
       "Name": "string",
       "PartitionKeyName": "string",
       "PartitionKeyType": "string",
       "Region": "string",
-      "StreamArn": "string"
-    },
-    "students": {
-      "Arn": "string",
-      "Name": "string",
-      "PartitionKeyName": "string",
-      "PartitionKeyType": "string",
-      "Region": "string",
-      "SortKeyName": "string",
-      "SortKeyType": "string",
       "StreamArn": "string"
     }
   }

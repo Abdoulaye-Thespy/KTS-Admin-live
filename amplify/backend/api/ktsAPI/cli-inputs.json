@@ -3,23 +3,16 @@
   "paths": {
     "/parents": {
       "name": "/parents",
-      "lambdaFunction": "ktsapp37bd30f2",
+      "lambdaFunction": "parentFunction",
       "permissions": {
-        "setting": "private",
+        "setting": "protected",
         "auth": [
           "create",
           "read",
           "update",
           "delete"
-        ]
-      }
-    },
-    "/students": {
-      "name": "/students",
-      "lambdaFunction": "students",
-      "permissions": {
-        "setting": "private",
-        "auth": [
+        ],
+        "guest": [
           "create",
           "read",
           "update",

@@ -22,18 +22,20 @@ import { Header } from "../components";
 const Orders = () => {
   const editing = { allowDeleting: true, allowEditing: true };
   const [parents, setParents] = useState({});
-  const apiName = 'parents'; // replace this with your api name.
-  const path = `/parents/p`;
+  const apiName = 'ktsAPI'; // replace this with your api name.
+  const parent_id = '12345678jkkjj';
+  const path = `/parents/${parent_id}`;
   const myInit = {
       // body: {parent_id: "12345678jkkjj",},
        headers: { // Allow POST method
         },
       response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
       queryStringParameters: {
-       parent_id: '1234567' // OPTIONAL
+       parent_id: '12345678jkkjj' // OPTIONAL
       }
   };
     useEffect(() => {
+      console.log(path);
         API.get(apiName, path, myInit)
         .then((response) => {
           // Add your code here

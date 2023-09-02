@@ -1,6 +1,6 @@
 {
   "api": {
-    "parents": {
+    "ktsAPI": {
       "dependsOn": [
         {
           "attributes": [
@@ -8,15 +8,7 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "ktsapp37bd30f2"
-        },
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "students"
+          "resourceName": "parentFunction"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -24,7 +16,7 @@
     }
   },
   "auth": {
-    "ktsapp8bc2274a8bc2274a": {
+    "ktsauth": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -52,7 +44,7 @@
     }
   },
   "function": {
-    "ktsapp37bd30f2": {
+    "parentFunction": {
       "build": true,
       "dependsOn": [
         {
@@ -65,26 +57,7 @@
             "Arn"
           ],
           "category": "storage",
-          "resourceName": "dynamo3a282170"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "students": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributeEnvMap": {
-            "Arn": "TABLE_ARN",
-            "Name": "TABLE_NAME"
-          },
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "storage",
-          "resourceName": "students"
+          "resourceName": "parentsTable"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -92,45 +65,25 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_ktsapp37bd30f2_deploymentBucketName": {
+    "AMPLIFY_function_parentFunction_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "ktsapp37bd30f2"
+          "resourceName": "parentFunction"
         }
       ]
     },
-    "AMPLIFY_function_ktsapp37bd30f2_s3Key": {
+    "AMPLIFY_function_parentFunction_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "ktsapp37bd30f2"
-        }
-      ]
-    },
-    "AMPLIFY_function_students_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "students"
-        }
-      ]
-    },
-    "AMPLIFY_function_students_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "students"
+          "resourceName": "parentFunction"
         }
       ]
     }
   },
   "storage": {
-    "dynamo3a282170": {
-      "providerPlugin": "awscloudformation",
-      "service": "DynamoDB"
-    },
-    "students": {
+    "parentsTable": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     }
