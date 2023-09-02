@@ -19,7 +19,7 @@
       "function": {
         "parentFunction": {
           "deploymentBucketName": "amplify-ktsapps-dev-192318-deployment",
-          "s3Key": "amplify-builds/parentFunction-67746c596b334b636c72-build.zip"
+          "s3Key": "amplify-builds/parentFunction-4e396a6a4d5833715244-build.zip"
         }
       },
       "storage": {

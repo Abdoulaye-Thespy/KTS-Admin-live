@@ -24,7 +24,7 @@ const Orders = () => {
   const [parents, setParents] = useState({});
   const apiName = 'ktsAPI'; // replace this with your api name.
   const parent_id = '12345678jkkjj';
-  const path = `/parents`;
+  const path = `/parents/${parent_id}`;
   const myInit = {
       // body: {parent_id: "12345678jkkjj",},
        headers: { // Allow POST method
