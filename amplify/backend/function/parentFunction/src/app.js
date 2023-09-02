@@ -9,7 +9,7 @@ See the License for the specific language governing permissions and limitations 
 
 
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
-const { DeleteCommand, DynamoDBDocumentClient, GetCommand, PutCommand, QueryCommand,  } = require('@aws-sdk/lib-dynamodb');
+const { DeleteCommand, DynamoDBDocumentClient, GetCommand, PutCommand, QueryCommand, ScanCommand  } = require('@aws-sdk/lib-dynamodb');
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
 const bodyParser = require('body-parser')
 const express = require('express')
@@ -60,33 +60,31 @@ const convertUrlType = (param, type) => {
  ********************************/
 
 app.get(path, async function(req, res) {
-  const condition = {}
-  condition[partitionKeyName] = {
-    ComparisonOperator: 'EQ'
-  }
-
-  if (userIdPresent && req.apiGateway) {
-    condition[partitionKeyName]['AttributeValueList'] = [req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH ];
-  } else {
-    try {
-      condition[partitionKeyName]['AttributeValueList'] = [ convertUrlType(req.params[partitionKeyName], partitionKeyType) ];
-    } catch(err) {
-      res.statusCode = 500;
-      res.json({error: 'Wrong column type ' + err});
-    }
-  }
-
-  let queryParams = {
-    TableName: tableName,
-    KeyConditions: condition
-  }
 
   try {
-    const data = await ddbDocClient.send(new QueryCommand(queryParams));
-    res.json(data.Items);
-  } catch (err) {
-    res.statusCode = 500;
-    res.json({error: 'Could not load items: ' + err.message});
+    // Extract the authenticated user's ID from API Gateway
+    if (userIdPresent) {
+    userId = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
+    }
+
+    // Define the parameters for scanning the DynamoDB table
+    const scanParams = {
+      TableName: 'parentsTable', // Replace with your actual table name
+      FilterExpression: 'parent_id = :parentId',
+      ExpressionAttributeValues: {
+        ':parentId': { S: 'YourPartitionKeyValue' }, // Replace with the appropriate partition key value
+      },
+    };
+
+    // Scan the DynamoDB table to retrieve all items for the authenticated user
+    const data = await ddbClient.send(new ScanCommand(scanParams));
+
+    // Return the retrieved items as the API response
+    return res.json(data.Items);
+  } catch (error) {
+    // Handle any errors that occur during the process
+    console.error(error);
+    return res.status(500).json({ error: 'Internal Server Error here' });
   }
 });
 
@@ -94,45 +92,45 @@ app.get(path, async function(req, res) {
  * HTTP Get method for get single object *
  *****************************************/
 
-app.get(path + '/object' + hashKeyPath + sortKeyPath, async function(req, res) {
-  const params = {};
-  if (userIdPresent && req.apiGateway) {
-    params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
-  } else {
-    params[partitionKeyName] = req.params[partitionKeyName];
-    try {
-      params[partitionKeyName] = convertUrlType(req.params[partitionKeyName], partitionKeyType);
-    } catch(err) {
-      res.statusCode = 500;
-      res.json({error: 'Wrong column type ' + err});
-    }
-  }
-  if (hasSortKey) {
-    try {
-      params[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
-    } catch(err) {
-      res.statusCode = 500;
-      res.json({error: 'Wrong column type ' + err});
-    }
-  }
+// app.get(path + '/object' + hashKeyPath + sortKeyPath, async function(req, res) {
+//   const params = {};
+//   if (userIdPresent && req.apiGateway) {
+//     params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
+//   } else {
+//     params[partitionKeyName] = req.params[partitionKeyName];
+//     try {
+//       params[partitionKeyName] = convertUrlType(req.params[partitionKeyName], partitionKeyType);
+//     } catch(err) {
+//       res.statusCode = 500;
+//       res.json({error: 'Wrong column type ' + err});
+//     }
+//   }
+//   if (hasSortKey) {
+//     try {
+//       params[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
+//     } catch(err) {
+//       res.statusCode = 500;
+//       res.json({error: 'Wrong column type ' + err});
+//     }
+//   }
 
-  let getItemParams = {
-    TableName: tableName,
-    Key: params
-  }
+//   let getItemParams = {
+//     TableName: tableName,
+//     Key: params
+//   }
 
-  try {
-    const data = await ddbDocClient.send(new GetCommand(getItemParams));
-    if (data.Item) {
-      res.json(data.Item);
-    } else {
-      res.json(data) ;
-    }
-  } catch (err) {
-    res.statusCode = 500;
-    res.json({error: 'Could not load items: ' + err.message});
-  }
-});
+//   try {
+//     const data = await ddbDocClient.send(new GetCommand(getItemParams));
+//     if (data.Item) {
+//       res.json(data.Item);
+//     } else {
+//       res.json(data) ;
+//     }
+//   } catch (err) {
+//     res.statusCode = 500;
+//     res.json({error: 'Could not load items: ' + err.message});
+//   }
+// });
 
 
 /************************************

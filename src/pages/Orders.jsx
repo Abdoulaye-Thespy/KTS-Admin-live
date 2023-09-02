@@ -24,7 +24,7 @@ const Orders = () => {
   const [parents, setParents] = useState({});
   const apiName = 'ktsAPI'; // replace this with your api name.
   const parent_id = '12345678jkkjj';
-  const path = `/parents/${parent_id}`;
+  const path = `/parents`;
   const myInit = {
       // body: {parent_id: "12345678jkkjj",},
        headers: { // Allow POST method
@@ -36,7 +36,7 @@ const Orders = () => {
   };
     useEffect(() => {
       console.log(path);
-        API.get(apiName, path, myInit)
+        API.get(apiName, path, {})
         .then((response) => {
           // Add your code here
           console.log("success");
