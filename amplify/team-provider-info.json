@@ -20,10 +20,15 @@
         "parentFunction": {
           "deploymentBucketName": "amplify-ktsapps-dev-192318-deployment",
           "s3Key": "amplify-builds/parentFunction-4e396a6a4d5833715244-build.zip"
+        },
+        "studentFunction": {
+          "deploymentBucketName": "amplify-ktsapps-dev-192318-deployment",
+          "s3Key": "amplify-builds/studentFunction-5a437a466962716f466d-build.zip"
         }
       },
       "storage": {
-        "parentsTable": {}
+        "parentsTable": {},
+        "studentTable": {}
       },
       "api": {
         "ktsAPI": {}

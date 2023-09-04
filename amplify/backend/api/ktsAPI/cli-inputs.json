@@ -19,6 +19,25 @@
           "delete"
         ]
       }
+    },
+    "/students": {
+      "name": "/students",
+      "lambdaFunction": "studentFunction",
+      "permissions": {
+        "setting": "protected",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ],
+        "guest": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
     }
   }
 }

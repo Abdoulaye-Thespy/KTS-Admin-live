@@ -9,6 +9,14 @@
           ],
           "category": "function",
           "resourceName": "parentFunction"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "studentFunction"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -62,6 +70,25 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "studentFunction": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "studentTable"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
@@ -80,10 +107,30 @@
           "resourceName": "parentFunction"
         }
       ]
+    },
+    "AMPLIFY_function_studentFunction_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "studentFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_studentFunction_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "studentFunction"
+        }
+      ]
     }
   },
   "storage": {
     "parentsTable": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "studentTable": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     }
