@@ -26,23 +26,7 @@ const Orders = () => {
   const parent_id = 'KTS-P-666666666';
   const path = `/parents`;
   const myInit = {
-       // body: {
-       //  parent_id: "KTS-P-777777777",
-       //  numberOfKids: 4,
-       //  CustomerName: "Karim",
-       //  Phone: "671515042",
-       //  Childen: {
-       //    Child1: "Kamila",
-       //    Child2: "Kayra",
-       //  },
-       //  AP: 100,
-       //  AO: 50,
-       //  TA: 150,
-       //  Adress: {
-       //    Quartier: "Logpom",
-       //    Zone: "Carrefour Basson",
-       //  },
-       // },
+
        headers: { // Allow POST method
         },
       response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
@@ -51,34 +35,32 @@ const Orders = () => {
       // }
   };
     useEffect(() => {
-      console.log(path);
         API.get(apiName, path, myInit)
         .then((response) => {
           // Add your code here
           setParents(response.data);
           console.log("success");
-          console.log(response.data);
         })
         .catch((error) => {
           console.log(error.response);
         });
-  },[]);
+    },[]);
 
        const customizeCell = (args) => {
-        if (args.column.field === "Childen"
+        if (args.column.field === "children"
             && args.data && args.cell) {
-            const arr = Object.values(args.data.Childen);
+            const arr = Object.values(args.data.children);
             const chidrenList = arr.map((item, index) => {
        
-               let  label = `Child ${index+1}`;
+            let  label = `Child ${index+1}`;
               return `<li>${label}: ${item}</li>`;
             }).join("");
             args.cell.innerHTML = `<ul>${chidrenList}</ul>`;
 
         }
-        else if (args.column.field === "Adress"
+        else if (args.column.field === "address"
             && args.data && args.cell) {
-            const arr = Object.values(args.data.Adress);
+            const arr = Object.values(args.data.address);
             const addressList = arr.map((item, index) => {
               let label;
               if (index === 1) {

@@ -22,41 +22,21 @@ const Customers = () => {
   const toolbarOptions = ["Delete"];
   const editing = { allowDeleting: true, allowEditing: true };
 
-  const [students, setStudents] = useState([]);
+  const [students, setStudents] = useState({});
   const apiName = 'ktsAPI'; // replace this with your api name.
-  const student_id = 'KTS-P-666666666';
   const path = `/students`;
   const myInit = {
-       // body: {
-       //  student_id: "KTS-S-111111222",
-       //  parent_id: "KTS-P-777777777",
-       //  transportPlan: "Aller et Retour",
-       //  parentName: "Abdoulaye",
-       //  Adress: {
-       //    Quartier: "Logpom",
-       //    Zone: "Carrefour Basson",
-       //  },
-       //  class: "SIL",
-       //  school: "Russian School",
-       //  pTime: "6h00",
-       //  dTime: "6h00",
-
-       // },
        headers: { // Allow POST method
         },
       response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
-      // queryStringParameters: {
-      //  parent_id: '12345678jkkjj' // OPTIONAL
-      // }
   };
     useEffect(() => {
-      console.log(path);
         API.get(apiName, path, myInit)
         .then((response) => {
           // Add your code here
-          setStudents(response.data);
-          console.log("success");
           console.log(response.data);
+          console.log("success");
+          setStudents(response.data);
         })
         .catch((error) => {
           console.log(error.response);
@@ -64,9 +44,9 @@ const Customers = () => {
   },[]);
 
    const customizeCell = (args) => {
-        if (args.column.field === "Adress"
+        if (args.column.field === "address"
             && args.data && args.cell) {
-            const arr = Object.values(args.data.Adress);
+            const arr = Object.values(args.data.address);
             const addressList = arr.map((item, index) => {
               let label;
               if (index === 1) {
