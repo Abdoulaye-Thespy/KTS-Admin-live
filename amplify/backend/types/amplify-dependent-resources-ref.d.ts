@@ -4,6 +4,10 @@ export type AmplifyDependentResourcesAttributes = {
       "ApiId": "string",
       "ApiName": "string",
       "RootUrl": "string"
+    },
+    "ktsapps": {
+      "GraphQLAPIEndpointOutput": "string",
+      "GraphQLAPIIdOutput": "string"
     }
   },
   "auth": {
@@ -22,7 +26,21 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
+    "GetParentChildren": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "driversFunction": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "ktsSendNotif": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -42,6 +60,14 @@ export type AmplifyDependentResourcesAttributes = {
       "LambdaExecutionRoleArn": "string",
       "Name": "string",
       "Region": "string"
+    }
+  },
+  "geo": {
+    "mapa9873ab7": {
+      "Arn": "string",
+      "Name": "string",
+      "Region": "string",
+      "Style": "string"
     }
   },
   "storage": {

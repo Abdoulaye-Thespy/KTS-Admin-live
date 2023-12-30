@@ -29,6 +29,34 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
+    },
+    "ktsapps": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "ktsauth"
+        }
+      ],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authktsauth"
+            }
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
     }
   },
   "auth": {
@@ -76,6 +104,11 @@
     }
   },
   "function": {
+    "GetParentChildren": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "driversFunction": {
       "build": true,
       "dependsOn": [
@@ -90,6 +123,20 @@
           ],
           "category": "storage",
           "resourceName": "Drivers"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "ktsSendNotif": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "studentTable"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -134,7 +181,41 @@
       "service": "Lambda"
     }
   },
+  "geo": {
+    "mapa9873ab7": {
+      "accessType": "AuthorizedUsers",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "ktsauth"
+        }
+      ],
+      "isDefault": true,
+      "mapStyle": "VectorEsriStreets",
+      "providerPlugin": "awscloudformation",
+      "service": "Map"
+    }
+  },
   "parameters": {
+    "AMPLIFY_function_GetParentChildren_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetParentChildren"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetParentChildren_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetParentChildren"
+        }
+      ]
+    },
     "AMPLIFY_function_driversFunction_deploymentBucketName": {
       "usedBy": [
         {
@@ -148,6 +229,22 @@
         {
           "category": "function",
           "resourceName": "driversFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_ktsSendNotif_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ktsSendNotif"
+        }
+      ]
+    },
+    "AMPLIFY_function_ktsSendNotif_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ktsSendNotif"
         }
       ]
     },

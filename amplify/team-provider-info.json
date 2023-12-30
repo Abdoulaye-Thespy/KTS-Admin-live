@@ -29,6 +29,16 @@
         "driversFunction": {
           "deploymentBucketName": "amplify-ktsapps-dev-192318-deployment",
           "s3Key": "amplify-builds/driversFunction-787a3051783467344261-build.zip"
+        },
+        "ktsSendNotif": {
+          "deploymentBucketName": "amplify-ktsapps-dev-192318-deployment",
+          "s3Key": "amplify-builds/ktsSendNotif-6e326c55556f574b7353-build.zip"
+        },
+        "SendNotifBeta": {},
+        "sendNotifbeta": {},
+        "GetParentChildren": {
+          "deploymentBucketName": "amplify-ktsapps-dev-192318-deployment",
+          "s3Key": "amplify-builds/GetParentChildren-42383739703455506652-build.zip"
         }
       },
       "storage": {
@@ -37,7 +47,11 @@
         "Drivers": {}
       },
       "api": {
-        "ktsAPI": {}
+        "ktsAPI": {},
+        "ktsapps": {}
+      },
+      "geo": {
+        "mapa9873ab7": {}
       }
     }
   }

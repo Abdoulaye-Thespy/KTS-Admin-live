@@ -1,0 +1,13 @@
+
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+}
+
+type User {
+  name: String
+  email: String
+}
+
+type Query {
+  getUserByName(name: String!): User @function(name: "GetParentChildren-dev")
+}
